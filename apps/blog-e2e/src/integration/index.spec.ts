@@ -1,11 +1,10 @@
-describe('blog', () => {
+describe('/index ', () => {
   beforeEach(() => cy.visit('/'));
 
   it('it should find the title of the page', () => {
     cy.get('[data-cy=title]').contains('Ryan\'s Ramblings')
   });
   it('should should find the title of a post', () => {
-    console.log(cy.get('[data-cy=post-title]'))
     cy.get('[data-cy=post-title]').contains('Intro To')
   })
   it('should should find the tags of a post', () => {

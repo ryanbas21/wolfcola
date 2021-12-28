@@ -14,6 +14,7 @@ jobs:
       CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
       CONTENTFUL_PREVIEW_TOKEN: ${{ secrets.CONTENTFUL_PREVIEW_TOKEN }}
       CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+      NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
     steps:
       - uses: actions/checkout@v2
         name: Checkout [main]
@@ -32,7 +33,8 @@ jobs:
       - run: pnpm exec nx affected --target=lint --parallel 
       - run: pnpm exec nx affected --target=test --parallel 
       - run: pnpm exec nx affected --target=build --parallel 
-      - run: pnpm exec nx affected --target=e2e --parallel 
+      - run: pnpm exec nx affected --target=e2e --configuration=ci --parallel 
+      - run: pnpm exec nx affected --target=deploy --parallel 
   pr:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
@@ -59,8 +61,7 @@ jobs:
       - run: pnpm exec nx affected --target=lint --parallel 
       - run: pnpm exec nx affected --target=test --parallel 
       - run: pnpm exec nx affected --target=build --parallel 
-      - run: pnpm exec nx affected --target=e2e --parallel 
-
+      - run: pnpm exec nx affected --target=e2e --configuration=ci --parallel 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         if: failure()

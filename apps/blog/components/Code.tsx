@@ -9,9 +9,9 @@ function Code ({ code, language }) {
   useEffect(() => {
     Prism.highlightAll();
   }, []);
-
+  
   return (
-  <div>    
+  <div data-cy='code-blocks'>    
     <pre className={`language-${language}`}>
       <code> 
         {code}

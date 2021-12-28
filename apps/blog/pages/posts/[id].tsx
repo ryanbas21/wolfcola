@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { INLINES, MARKS } from '@contentful/rich-text-types';
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import { useRouter } from "next/router";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import className from "../index.module.css";
@@ -38,6 +38,9 @@ const options = {
 		}
   },
   renderNode: {
+    [BLOCKS.HEADING_2]: (node, next) => {
+      return <h2 data-cy="post-heading"><strong>{node.content[0].value}</strong></h2>;
+    },
 		[INLINES.HYPERLINK]: (node, next) => {
 			return `<a href="${node.data.uri}">${next(node.content)}</a>`;
 		},
@@ -47,7 +50,6 @@ const options = {
   },
 }
 export default function Post({post, relatedPosts}){
-
     const router = useRouter();
 
     return (
@@ -68,7 +70,7 @@ export default function Post({post, relatedPosts}){
             <>
             <div className={className.content}>
 
-            <h2 className={className.title}>
+            <h2 className={className.title} data-cy="post-title">
                 {post.title}
             </h2>
             <div className={className.contentBody}>

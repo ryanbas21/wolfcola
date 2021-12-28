@@ -34,7 +34,7 @@ export function Index({ allPosts = [] }: Props) {
                 allPosts.map(({ title, subHeader, tags, sys : { id } }) => (
                     <div className={styles.card} key={id} data-cy="post">
                     <div className={styles.details}>
-                        <Link href={`posts/${id}`}>
+                        <Link href={`/posts/${id}`}>
                         <a data-cy="post-title">
                           {title}
                           <p data-cy="post-date">
