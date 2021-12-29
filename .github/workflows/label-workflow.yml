@@ -1,0 +1,37 @@
+name: Labler
+
+on:
+  check_run: 
+    types: [rerequested, completed]
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    name: Label
+    steps:
+      - name: Labeler
+        uses: actions/labeler@v3
+        with:
+          sync-labels: true
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+  success:
+    runs-on: ubuntu-latest
+    name: Label for merge
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.status.state == 'success') }}
+        with:
+          labels: |
+            ready
+  failure:
+    runs-on: ubuntu-latest
+    name: Label do not merge
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.status.state == 'failure') }}
+        with:
+          labels: |
+            do not merge
+        
