@@ -1,0 +1,20 @@
+root:
+- '*'
+
+ci:
+- .github/*
+- .github/**/*
+
+"@apps/blog":
+- apps/blog/*
+- apps/blog/**/*
+
+"@apps/blog-e2e":
+- apps/blog-e2e/*
+- apps/blog-e2e/**/*
+
+docs: docs/*
+
+test:
+- "**/*.spec.ts"
+- "**/*.test.ts"

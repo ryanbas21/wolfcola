@@ -1,0 +1,15 @@
+name: Labler
+
+on:
+  pull_request: 
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    name: Label
+    steps:
+      - name: Labeler
+        uses: actions/labeler@v3
+        with:
+          sync-labels: true
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
