@@ -4,7 +4,7 @@
   "projectType": "application",
   "targets": {
     "deploy": {
-      "executor": "@netlify-builder:deploy",
+      "executor": "@netlify-builder/deploy:deploy",
       "options": {
         "outputPath": "dist/apps/blog",
         "siteId": "0941a32f-bb56-41cc-a50e-1d3cee0bc9b1"
