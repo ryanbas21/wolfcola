@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  blog:
+    build:
+      dockerfile: ./apps/blog/Dockerfile.dev
+      args:
+        - PORT=8080
+    ports:
+      - 8080
