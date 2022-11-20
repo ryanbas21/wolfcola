@@ -5,7 +5,8 @@
     "blog-e2e": "apps/blog-e2e"
   },
   "workspaceLayout": {
-    "apps": "apps",
-    "libs": "libs"
-  }
+    "apps": "",
+    "libs": ""
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

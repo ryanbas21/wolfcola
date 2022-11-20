@@ -1,5 +1,6 @@
 {
-  "root": "apps/blog-e2e",
+  "name": "blog-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/blog-e2e/src",
   "projectType": "application",
   "targets": {
@@ -13,7 +14,6 @@
         "ci": {
           "key": "7cbcf3ed-f551-4fab-991f-5d693bd1cd22",
           "record": true
-
         },
         "production": {
           "devServerTarget": "blog:serve:production"

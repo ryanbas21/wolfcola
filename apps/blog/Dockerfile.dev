@@ -1,7 +1,8 @@
-FROM node:16-alpine
+FROM okteto.dev/wolfcola
 
-COPY --from=okteto.dev/base . .
+ARG NODE_ENV=development
+ENV NODE_ENV=$NODE_ENV
 ARG PORT
 EXPOSE $PORT 80
 
-RUN npx nx serve blog
+CMD pnpm exec nx serve blog

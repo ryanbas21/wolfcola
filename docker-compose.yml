@@ -1,10 +1,11 @@
-version: "3.7"
+version: "3.9"
 
 services:
   blog:
     build:
       dockerfile: ./apps/blog/Dockerfile.dev
       args:
-        - PORT=8080
+        - PORT=4200
+        - NODE_ENV=development
     ports:
-      - 8080
+      - 4200
