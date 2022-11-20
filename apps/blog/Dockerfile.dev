@@ -2,7 +2,8 @@ FROM okteto.dev/wolfcola
 
 ARG NODE_ENV=development
 ENV NODE_ENV=$NODE_ENV
-ARG PORT
-EXPOSE $PORT 80
+
+ARG PORT=4200
+EXPOSE $PORT 
 
 CMD pnpm exec nx serve blog

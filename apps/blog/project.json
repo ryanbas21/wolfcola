@@ -37,7 +37,7 @@
       },
       "configurations": {
         "production": {
-          "buildTarget": "blog:build:production",
+          "buildTarget": "blog:build:development",
           "dev": false
         },
         "development": {

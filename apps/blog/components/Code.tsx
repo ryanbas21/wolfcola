@@ -5,20 +5,21 @@ import "prismjs/plugins/unescaped-markup/prism-unescaped-markup.min.js";
 import "prismjs/plugins/normalize-whitespace/prism-normalize-whitespace.min.js";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 
-function Code ({ code, language }) {
+function Code({ code, language }) {
   useEffect(() => {
     Prism.highlightAll();
   }, []);
-  
+
   return (
-  <div data-cy='code-blocks'>    
-    <pre className={`language-${language}`}>
-      <code> 
-        {code}
-      </code>
-    </pre>
-  </div>
+    <div data-cy='code-blocks'>
+      <pre className={`language-${language}`}>
+        <code>
+          {code}
+        </code>
+      </pre>
+    </div>
   );
 }
 
 export default Code;
+
