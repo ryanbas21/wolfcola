@@ -1,27 +1,19 @@
- [build.environment]
-   NPM_FLAGS="--version"
-   TERM = "xterm"
  [build]
-  command = "npx pnpm install --store=node_modules/.pnpm-store && npx pnpm exec nx run blog:build:production"
-  publish = "../../dist/apps/blog/.next"
-
+  base = ""
+  command = "npx pnpm i --store=node_modules/.pnpm-store && pnpm nx run blog:build:production"
+  publish = "dist/apps/blog/.next"
+[build.environment]
+  NODE_VERSION = "16.17.0"
 [dev]
   command = "pnpm nx run blog:serve"
   targetPort = 4200
- [[plugins]]
-  package = "@netlify/plugin-lighthouse"
- [[plugins]]
-  package = "@netlify/plugin-nextjs" 
-    # Don’t record Cypress tests in Deploy Previews.
-    # Since this entry is more specific, it overrides the entry above.
-    # `context.deploy-preview.plugins` and `package` must be included.
-    # [[context.deploy-preview.plugins]]
-    # package = "netlify-plugin-cypress"
+    [[context.deploy-preview.plugins]]
+    package = "netlify-plugin-cypress"
     # Use single brackets since `inputs` is an object property
-    #[context.deploy-preview.plugins.inputs]
-    # record = true
-    # enable = true
-    #  spec = "../blog-e2e/**/*.spec.ts" 
-    #  configFile = "../blog-e2e/cypress.json"
-    #  postBuild = true
+    [context.deploy-preview.plugins.inputs]
+    record = true
+    enable = true
+     spec = "../blog-e2e/**/*.spec.ts" 
+     configFile = "../blog-e2e/cypress.json"
+     postBuild = true
       

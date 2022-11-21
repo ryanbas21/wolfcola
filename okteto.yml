@@ -1,0 +1,51 @@
+name: wolfcola
+
+# The build section defines how to build the images of your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#build
+build:
+  wolfcola:
+    image: okteto.dev/wolfcola
+    context: .
+    dockerfile: Dockerfile
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_BLOG_REGISTRY: image registry
+  #  - OKTETO_BUILD_BLOG_REPOSITORY: image repo
+  #  - OKTETO_BUILD_BLOG_IMAGE: image name
+  #  - OKTETO_BUILD_BLOG_SHA: image tag sha256
+
+  blog:
+    context: .
+    dockerfile: apps/blog/Dockerfile.dev
+    depends_on: wolfcola
+    args:
+      NODE_ENV: "development"
+      PORT: 4200
+
+# The deploy section defines how to deploy your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#deploy
+deploy:
+  compose:
+    file: docker-compose.yml
+
+# The dependencies section defines other git repositories to be deployed as part of your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#dependencies
+# dependencies:
+#   - https://github.com/okteto/sample
+
+
+# The dev section defines how to activate a development container
+# More info: https://www.okteto.com/docs/reference/manifest/#dev
+dev:
+  blog:
+    command:
+      - pnpm
+      - exec
+      - nx
+      - serve
+      - blog
+    sync:
+      - .:/app
+    forward:
+      - 4200:4200
+

@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  blog:
+    command: pnpm exec nx serve blog 
+    build:
+      dockerfile: ./apps/blog/Dockerfile.dev
+      args:
+        - PORT=4200
+        - NODE_ENV=development
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
