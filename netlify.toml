@@ -1,0 +1,9 @@
+ [build]
+  command = "pnpm run nx build blog --prod"
+  publish = "./dist/apps/blog/.next"
+
+ [[plugins]]
+  package = "@netlify/plugin-nextjs"
+ [[plugins]]
+  package = "@netlify/plugin-lighthouse"
+

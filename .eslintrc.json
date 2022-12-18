@@ -13,8 +13,28 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
+                "sourceTag": "app",
                 "onlyDependOnLibsWithTags": ["*"]
+              },
+              {
+                "sourceTag": "package",
+                "onlyDependOnLibsWithTags": ["shared", "util", "package", "ui", "types"]
+              },
+              {
+                "sourceTag": "ui",
+                "onlyDependOnLibsWithTags": ["shared", "util", "ui", "types"]
+              },
+              {
+                "sourceTag": "shared",
+                "onlyDependOnLibsWithTags": ["util", "types"]
+              },
+              {
+                "sourceTag": "util",
+                "onlyDependOnLibsWithTags": ["util", "types"]
+              },
+              {
+                "sourceTag": "types",
+                "onlyDependOnLibsWithTags": ["types"]
               }
             ]
           }
