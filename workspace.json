@@ -7,5 +7,6 @@
   "workspaceLayout": {
     "apps": "apps",
     "libs": "libs"
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

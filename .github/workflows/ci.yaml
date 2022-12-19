@@ -16,25 +16,25 @@ jobs:
       CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
       NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         name: Checkout [main]
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v2.0.1
-        with: 
-          version: 6.24.2
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7.18.2
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '18'
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm exec nx affected --target=lint --parallel 
-      - run: pnpm exec nx affected --target=test --parallel 
-      - run: pnpm exec nx affected --target=build --parallel 
-      - run: pnpm exec nx affected --target=e2e --configuration=ci --parallel 
-      - run: pnpm exec nx affected --target=deploy --parallel 
+      - run: pnpm exec nx affected --target=lint --parallel
+      - run: pnpm exec nx affected --target=test --parallel
+      - run: pnpm exec nx affected --target=build --parallel
+      - run: pnpm exec nx affected --target=e2e --configuration=ci --parallel
+      - run: pnpm exec nx affected --target=deploy --parallel
   pr:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
@@ -43,30 +43,32 @@ jobs:
       CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
       CONTENTFUL_PREVIEW_TOKEN: ${{ secrets.CONTENTFUL_PREVIEW_TOKEN }}
       CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+      CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
-      - uses: pnpm/action-setup@v2.0.1
-        with: 
+      - uses: pnpm/action-setup@v2.2.4
+        with:
           version: 6.24.2
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '18'
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm exec nx affected --target=lint --parallel 
-      - run: pnpm exec nx affected --target=test --parallel 
-      - run: pnpm exec nx affected --target=build --parallel 
-      - run: pnpm exec nx affected --target=e2e --configuration=ci --parallel 
+      - run: pnpm exec nx affected --target=lint --parallel
+      - run: pnpm exec nx affected --target=test --parallel
+      - run: pnpm exec nx affected --target=build --parallel
+      - run: pnpm exec nx affected --target=e2e --parallel
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: 'e2e results'
-          path: | 
-            ${{github.workspace}}/dist/cypress/packages/**/screenshots 
-            ${{github.workspace}}/dist/cypress/packages/**/videos 
+          path: |
+            ${{github.workspace}}/dist/cypress/packages/**/screenshots
+            ${{github.workspace}}/dist/cypress/packages/**/videos

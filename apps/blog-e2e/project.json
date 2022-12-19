@@ -1,20 +1,17 @@
 {
-  "root": "apps/blog-e2e",
+  "name": "blog-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/blog-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/blog-e2e/cypress.json",
-        "devServerTarget": "blog:serve"
+        "cypressConfig": "apps/blog-e2e/cypress.config.ts",
+        "devServerTarget": "blog:serve",
+        "record": true
       },
       "configurations": {
-        "ci": {
-          "key": "7cbcf3ed-f551-4fab-991f-5d693bd1cd22",
-          "record": true
-
-        },
         "production": {
           "devServerTarget": "blog:serve:production"
         }
@@ -28,6 +25,6 @@
       }
     }
   },
-  "tags": [],
+  "tags": ["app"],
   "implicitDependencies": ["blog"]
 }
