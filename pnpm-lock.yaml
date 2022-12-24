@@ -25,6 +25,7 @@ specifiers:
   '@types/react-dom': 18.0.9
   '@typescript-eslint/eslint-plugin': 5.46.1
   '@typescript-eslint/parser': 5.46.1
+  axios: ^1.2.1
   babel-jest: 29.3.1
   core-js: ^3.26.1
   cypress: ^12.1.0
@@ -59,6 +60,7 @@ specifiers:
 dependencies:
   '@contentful/rich-text-react-renderer': 15.16.2_biqbaboplfbrettd7655fr4n2y
   '@contentful/rich-text-types': 16.0.2
+  axios: 1.2.1
   core-js: 3.26.1
   next: 13.0.7_672uxklweod7ene3nqtsh262ca
   nx: 15.3.3
