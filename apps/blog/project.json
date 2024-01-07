@@ -1,7 +1,6 @@
 {
   "name": "blog",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/blog",
   "projectType": "application",
   "targets": {
     "deploy": {
@@ -12,11 +11,10 @@
       }
     },
     "build": {
-      "executor": "@nrwl/next:build",
+      "executor": "@nx/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/blog",
         "outputPath": "dist/apps/blog"
       },
       "configurations": {
@@ -27,7 +25,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/next:server",
+      "executor": "@nx/next:server",
       "options": {
         "buildTarget": "blog:build",
         "dev": true
@@ -45,24 +43,27 @@
       "defaultConfiguration": "development"
     },
     "export": {
-      "executor": "@nrwl/next:export",
+      "executor": "@nx/next:export",
       "options": {
         "buildTarget": "blog:build:production"
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/blog"],
       "options": {
-        "jestConfig": "apps/blog/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/blog/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "e2e": {
+      "executor": "@nx/playwright:playwright",
+      "outputs": ["{workspaceRoot}/dist/.playwright/apps/blog"],
       "options": {
-        "lintFilePatterns": ["apps/blog/**/*.{ts,tsx,js,jsx}"]
+        "config": "apps/blog/playwright.config.ts"
       }
     }
   },
